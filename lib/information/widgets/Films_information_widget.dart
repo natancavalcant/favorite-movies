@@ -9,12 +9,10 @@ class FilmsInformationWidget extends StatefulWidget {
   var _film;
   FilmsInformationWidget(this._film);
   @override
-  _FilmsInformationState createState() => _FilmsInformationState(_film);
+  _FilmsInformationState createState() => _FilmsInformationState();
 }
 
 class _FilmsInformationState extends State<FilmsInformationWidget> {
-  var _film;
-  _FilmsInformationState(this._film);
   bool _favorite = false;
   String _favoriteImage = AppImages.naoFavorito;
   @override
@@ -35,7 +33,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
           Container(
             padding: EdgeInsets.only(bottom: 8),
             child: Text(
-              "${_film["nome"]}",
+              "${widget._film["nome"]}",
               style: AppTextFonts.heading_2,
             ),
           ),
@@ -48,7 +46,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                 width: 265,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("${_film["banner"]}"),
+                    image: AssetImage("${widget._film["banner"]}"),
                   ),
                 ),
               ),
@@ -96,7 +94,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, left: 2),
                   child: Text(
-                    "${_film["detalhes"]}",
+                    "${widget._film["detalhes"]}",
                     style: AppTextFonts.text_2,
                   ),
                 )

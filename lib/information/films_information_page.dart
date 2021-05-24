@@ -9,7 +9,7 @@ class FilmsInformationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarInformationWidget(),
+      appBar: AppBarInformationWidget(context),
       body: ListView(
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -4,7 +4,7 @@ import 'package:favoritemovies/core/app_text_fonts.dart';
 import 'package:flutter/material.dart';
 
 class AppBarInformationWidget extends PreferredSize {
-  AppBarInformationWidget()
+  AppBarInformationWidget(context)
       : super(
           preferredSize: Size.fromHeight(130),
           child: Container(
@@ -20,7 +20,9 @@ class AppBarInformationWidget extends PreferredSize {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
                         child: Container(
                           height: 25,
                           width: 25,

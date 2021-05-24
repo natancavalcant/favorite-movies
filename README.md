@@ -1,6 +1,10 @@
 # favoritemovies
 
-A new Flutter project.
+Uma aplicação que acessa o banco de dados do TMDB para mostrar informações dos filmes ao usuário.
+
+## Run aplication
+
+Para instalar as dependências: flutter pub get. Para rodar a aplicação recomendo utilizar um emulador android, o próprio VsCode da uma opção para executar em um emulador aberto na aba de debug.
 
 ## Getting Started
 

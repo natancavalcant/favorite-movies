@@ -70,4 +70,10 @@ class AppTextFonts {
     fontWeight: FontWeight.bold,
     textStyle: TextStyle(decoration: TextDecoration.underline),
   );
+
+  static final TextStyle alter = GoogleFonts.roboto(
+    color: AppColors.blue,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
 }

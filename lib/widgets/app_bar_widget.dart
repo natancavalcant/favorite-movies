@@ -1,10 +1,11 @@
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_images.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
+import 'package:favoritemovies/menu/app_menu_page.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends PreferredSize {
-  AppBarWidget()
+  AppBarWidget(context)
       : super(
           preferredSize: Size.fromHeight(130),
           child: Container(
@@ -20,7 +21,13 @@ class AppBarWidget extends PreferredSize {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AppMenuPage()),
+                          );
+                        },
                         child: Container(
                           height: 20,
                           width: 30,
