@@ -63,6 +63,11 @@ class AppTextFonts {
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );
+  static final TextStyle text_3 = GoogleFonts.roboto(
+    color: AppColors.grafit,
+    fontSize: 9,
+    fontWeight: FontWeight.normal,
+  );
 
   static final TextStyle whiteTextButton = GoogleFonts.roboto(
     color: AppColors.white,

@@ -1,10 +1,10 @@
 import 'package:favoritemovies/core/app_text_fonts.dart';
 import 'package:favoritemovies/home/widgets/films/app_list_films_widget.dart';
+import 'package:favoritemovies/models/categories.dart';
 import 'package:flutter/material.dart';
 
 class AppCategoriesFilmsWidget extends StatelessWidget {
-  List<String> _categories = [];
-  AppCategoriesFilmsWidget(this._categories);
+  final List<String> _categories = Categories().getCategories();
   Widget _buildCategoryItem(BuildContext context, int index) {
     return Padding(
       padding: const EdgeInsets.only(left: 4, top: 20),
@@ -29,7 +29,7 @@ class AppCategoriesFilmsWidget extends StatelessWidget {
               ],
             ),
           ),
-          AppFilmsWidget(),
+          AppFilmsWidget(_categories[index]), //passar categoria
         ],
       ),
     );

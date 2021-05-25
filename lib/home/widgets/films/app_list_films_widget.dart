@@ -1,7 +1,11 @@
-import 'package:favoritemovies/core/app_images.dart';
+import 'package:favoritemovies/models/films.dart';
+import 'package:favoritemovies/widgets/app_film_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppFilmsWidget extends StatefulWidget {
+  final String _categorie;
+  final List<Films> films = Films.getFilms();
+  AppFilmsWidget(this._categorie);
   @override
   _AppFilmsWidgetState createState() => _AppFilmsWidgetState();
 }
@@ -17,15 +21,7 @@ class _AppFilmsWidgetState extends State<AppFilmsWidget> {
         itemCount: 10,
         itemBuilder: (context, i) {
           if (i >= 10) {}
-          return Container(
-            width: 144.52,
-            height: 216.78,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppImages.movieBanner),
-              ),
-            ),
-          );
+          return AppFilmWidget(widget.films[i]);
         },
       ),
     );

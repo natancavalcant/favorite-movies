@@ -4,7 +4,7 @@ import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppMenuWidget extends StatefulWidget {
-  var _user;
+  final _user;
   AppMenuWidget(this._user);
 
   @override
@@ -12,6 +12,7 @@ class AppMenuWidget extends StatefulWidget {
 }
 
 class _AppMenuWidgetState extends State<AppMenuWidget> {
+  bool showPassword = true;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,9 +20,11 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
         Container(
           padding: EdgeInsets.only(bottom: 10),
           height: 140,
-          alignment: Alignment.bottomLeft,
+          alignment: Alignment.bottomCenter,
           child: Container(
-            padding: EdgeInsets.only(left: 50),
+            alignment: Alignment.bottomLeft,
+            height: 30,
+            width: 320,
             child: Text(
               "Alterar Informações.",
               style: AppTextFonts.alter,
@@ -42,7 +45,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             width: 307,
             child: TextField(
               controller:
-                  TextEditingController(text: "${widget._user["username"]}"),
+                  TextEditingController(text: "${widget._user.username}"),
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -65,27 +68,66 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(top: 20),
-          child: Container(
-            height: 30,
-            width: 307,
-            child: TextField(
-              controller:
-                  TextEditingController(text: "${widget._user["password"]}"),
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(color: Colors.white, width: 0.0),
-                ),
-                fillColor: AppColors.grey,
-                filled: true,
-                labelText: "senha",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+          padding: EdgeInsets.only(left: 30),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                alignment: Alignment.bottomCenter,
+                padding: EdgeInsets.only(top: 20),
+                child: Container(
+                  height: 30,
+                  width: 307,
+                  child: TextField(
+                    obscureText: !showPassword,
+                    controller:
+                        TextEditingController(text: "${widget._user.password}"),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide(color: Colors.white, width: 0.0),
+                      ),
+                      fillColor: AppColors.grey,
+                      filled: true,
+                      labelText: "senha",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 13,
+                      width: 13,
+                      padding: EdgeInsets.only(top: 4),
+                      child: Checkbox(
+                        value: showPassword,
+                        onChanged: (value) {
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 4),
+                      child: Text(
+                        "mostrar",
+                        style: AppTextFonts.text_3,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
         Container(
@@ -95,7 +137,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             width: 307,
             child: TextField(
               controller:
-                  TextEditingController(text: "${widget._user["question"]}"),
+                  TextEditingController(text: "${widget._user.question}"),
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -118,8 +160,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             height: 30,
             width: 307,
             child: TextField(
-              controller:
-                  TextEditingController(text: "${widget._user["answer"]}"),
+              controller: TextEditingController(text: "${widget._user.answer}"),
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -180,10 +221,6 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             ),
           ),
         ),
-        Expanded(
-          child: Container(),
-        ),
-        AppAuthorBarWidget()
       ],
     );
   }

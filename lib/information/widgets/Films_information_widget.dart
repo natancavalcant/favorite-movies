@@ -1,25 +1,23 @@
 import 'package:favoritemovies/core/app_images.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
-import 'package:favoritemovies/home/widgets/films/app_search_films_bar_widget.dart';
-import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
-import 'package:favoritemovies/widgets/app_bar_widget.dart';
+import 'package:favoritemovies/models/films.dart';
+
 import 'package:flutter/material.dart';
 
 class FilmsInformationWidget extends StatefulWidget {
-  var _film;
+  final Films _film;
   FilmsInformationWidget(this._film);
   @override
   _FilmsInformationState createState() => _FilmsInformationState();
 }
 
 class _FilmsInformationState extends State<FilmsInformationWidget> {
-  bool _favorite = false;
   String _favoriteImage = AppImages.naoFavorito;
   @override
   Widget build(BuildContext context) {
     setState(
       () {
-        if (_favorite == true) {
+        if (widget._film.favorite == true) {
           _favoriteImage = AppImages.favorito;
         }
       },
@@ -33,7 +31,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
           Container(
             padding: EdgeInsets.only(bottom: 8),
             child: Text(
-              "${widget._film["nome"]}",
+              "${widget._film.name}",
               style: AppTextFonts.heading_2,
             ),
           ),
@@ -46,7 +44,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                 width: 265,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("${widget._film["banner"]}"),
+                    image: AssetImage("${widget._film.assetImage}"),
                   ),
                 ),
               ),
@@ -59,6 +57,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                       onTap: () {
                         setState(
                           () {
+                            widget._film.favorite = !widget._film.favorite;
                             _favoriteImage =
                                 _favoriteImage == AppImages.naoFavorito
                                     ? AppImages.favorito
@@ -94,7 +93,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, left: 2),
                   child: Text(
-                    "${widget._film["detalhes"]}",
+                    "${widget._film.description}",
                     style: AppTextFonts.text_2,
                   ),
                 )
