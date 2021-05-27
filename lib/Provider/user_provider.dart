@@ -4,15 +4,18 @@ import 'package:flutter/cupertino.dart';
 class UserProvider extends ChangeNotifier {
   UserProvider instance = UserProvider();
 
-  User _user = User.getUser();
+  String username = "";
+  String email = "";
+  String password = "";
+  String question = "";
+  String answer = "";
 
-  alterUser({username, email, password, question, answer}) {
-    _user = User(
+  User getUser(covariant) {
+    return User(
         username: username,
         email: email,
         password: password,
         question: question,
         answer: answer);
-    notifyListeners();
   }
 }

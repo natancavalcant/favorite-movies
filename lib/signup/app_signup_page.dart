@@ -7,12 +7,19 @@ import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class AppSignupPage extends StatelessWidget {
+class AppSignupPage extends StatefulWidget {
+  //UserProvider userProvider = UserProvider().instance;
+  @override
+  _AppSignupPageState createState() => _AppSignupPageState();
+}
+
+class _AppSignupPageState extends State<AppSignupPage> {
   String _username = "";
   String _email = "";
   String _password = "";
   String _question = "";
   String _answer = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +55,9 @@ class AppSignupPage extends StatelessWidget {
                         onChanged: (value) {
                           _username = value;
                         },
+                        maxLength: 100,
                         decoration: InputDecoration(
+                          counterText: "",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide:
@@ -75,7 +84,9 @@ class AppSignupPage extends StatelessWidget {
                         onChanged: (value) {
                           _email = value;
                         },
+                        maxLength: 100,
                         decoration: InputDecoration(
+                          counterText: "",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide:
@@ -128,7 +139,9 @@ class AppSignupPage extends StatelessWidget {
                         onChanged: (value) {
                           _question = value;
                         },
+                        maxLength: 100,
                         decoration: InputDecoration(
+                          counterText: "",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide:
@@ -155,7 +168,9 @@ class AppSignupPage extends StatelessWidget {
                         onChanged: (value) {
                           _answer = value;
                         },
+                        maxLength: 100,
                         decoration: InputDecoration(
+                          counterText: "",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide:
@@ -183,9 +198,25 @@ class AppSignupPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18.71),
                       ),
                       child: GestureDetector(
-                        onTap: () {
-                          print(_email);
-                          SignupController().test();
+                        onTap: () async {
+                          var response = await SignupController().signup(
+                              _username, _email, _password, _question, _answer);
+
+                          if (response == 200) {
+                            _alert(context, "Cadastro realizado",
+                                "Por favor, efetue o login", false);
+                          } else {
+                            if (response == 500) {
+                              _alert(context, "Erro:", "Email já cadastrado!",
+                                  true);
+                            } else if (response == 422) {
+                              _alert(
+                                  context,
+                                  "Erro:",
+                                  "Sua senha deve ter no minimo 8 caracteres.",
+                                  true);
+                            }
+                          }
                         },
                         child: Center(
                           child: Text(
@@ -230,18 +261,28 @@ class AppSignupPage extends StatelessWidget {
     );
   }
 
-  _alert(BuildContext context, title, body) {
+  _alert(BuildContext context, String title, String body, bool err) {
     Widget button = TextButton(
       onPressed: () {
-        Navigator.pop(context);
+        if (err == false) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AppLoginPage()));
+        } else {
+          print(err);
+          Navigator.pop(context);
+        }
       },
       child: Text("ok"),
     );
     var alertBox = AlertDialog(
       title: Text("$title"),
-      content: Text("%body"),
+      content: Text("$body"),
       actions: [button],
     );
-    return alertBox;
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alertBox;
+        });
   }
 }
