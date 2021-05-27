@@ -1,10 +1,11 @@
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
-import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
+import 'package:favoritemovies/models/user.dart';
 import 'package:flutter/material.dart';
 
 class AppMenuWidget extends StatefulWidget {
-  final _user;
+  final User _user;
+
   AppMenuWidget(this._user);
 
   @override
@@ -59,10 +60,8 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              onSubmitted: (text) {
-                if (text.isNotEmpty) {
-                  widget._user["username"] = text;
-                }
+              onChanged: (text) {
+                if (text.isNotEmpty) {}
               },
             ),
           ),
@@ -80,6 +79,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                   height: 30,
                   width: 307,
                   child: TextField(
+                    onChanged: (value) {},
                     obscureText: !showPassword,
                     controller:
                         TextEditingController(text: "${widget._user.password}"),

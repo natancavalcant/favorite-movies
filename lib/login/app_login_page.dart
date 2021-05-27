@@ -1,6 +1,7 @@
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_images.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
+import 'package:favoritemovies/signup/app_signup_page.dart';
 import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -13,7 +14,7 @@ class AppLoginPage extends StatelessWidget {
         decoration: BoxDecoration(color: AppColors.red),
         child: ListView(
           children: [
-            Expanded(
+            Container(
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.122,
               ),
@@ -103,7 +104,14 @@ class AppLoginPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppSignupPage(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Criar conta',
                         style: AppTextFonts.whiteTextButton,
@@ -123,7 +131,7 @@ class AppLoginPage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            Container(
               child: Container(
                 height: 91,
               ),

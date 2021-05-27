@@ -1,11 +1,18 @@
+import 'package:favoritemovies/controllers/signup_controller.dart';
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_images.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
+import 'package:favoritemovies/login/app_login_page.dart';
 import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class AppSigninPage extends StatelessWidget {
+class AppSignupPage extends StatelessWidget {
+  String _username = "";
+  String _email = "";
+  String _password = "";
+  String _question = "";
+  String _answer = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,9 +20,9 @@ class AppSigninPage extends StatelessWidget {
         decoration: BoxDecoration(color: AppColors.red),
         child: ListView(
           children: [
-            Expanded(
+            Container(
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.10,
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
             ),
             Center(
@@ -33,12 +40,14 @@ class AppSigninPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: EdgeInsets.only(top: 27),
                     child: Container(
                       height: 30,
                       width: 307,
                       child: TextField(
-                        onSubmitted: (value) {},
+                        onChanged: (value) {
+                          _username = value;
+                        },
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -63,8 +72,37 @@ class AppSigninPage extends StatelessWidget {
                       height: 30,
                       width: 307,
                       child: TextField(
+                        onChanged: (value) {
+                          _email = value;
+                        },
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 0.0),
+                          ),
+                          fillColor: AppColors.white,
+                          filled: true,
+                          labelText: "e-mail",
+
+                          //icon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 27),
+                    child: Container(
+                      height: 30,
+                      width: 307,
+                      child: TextField(
                         obscureText: true,
-                        onSubmitted: (value) {},
+                        onChanged: (value) {
+                          _password = value;
+                        },
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -87,7 +125,9 @@ class AppSigninPage extends StatelessWidget {
                       height: 30,
                       width: 307,
                       child: TextField(
-                        onSubmitted: (value) {},
+                        onChanged: (value) {
+                          _question = value;
+                        },
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -112,7 +152,9 @@ class AppSigninPage extends StatelessWidget {
                       height: 30,
                       width: 307,
                       child: TextField(
-                        onSubmitted: (value) {},
+                        onChanged: (value) {
+                          _answer = value;
+                        },
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -141,7 +183,10 @@ class AppSigninPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18.71),
                       ),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          print(_email);
+                          SignupController().test();
+                        },
                         child: Center(
                           child: Text(
                             'Criar conta',
@@ -154,7 +199,14 @@ class AppSigninPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppLoginPage(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'entrar',
                         style: AppTextFonts.whiteTextButton,
@@ -164,7 +216,7 @@ class AppSigninPage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            Container(
                 child: Container(
               height: 5,
             )),
@@ -176,5 +228,20 @@ class AppSigninPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _alert(BuildContext context, title, body) {
+    Widget button = TextButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: Text("ok"),
+    );
+    var alertBox = AlertDialog(
+      title: Text("$title"),
+      content: Text("%body"),
+      actions: [button],
+    );
+    return alertBox;
   }
 }
