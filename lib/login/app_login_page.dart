@@ -1,12 +1,22 @@
+import 'package:favoritemovies/controllers/auth_controller.dart';
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_images.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
+import 'package:favoritemovies/home/app_home_page.dart';
+import 'package:favoritemovies/login/app_search_email_page.dart';
 import 'package:favoritemovies/signup/app_signup_page.dart';
 import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class AppLoginPage extends StatelessWidget {
+class AppLoginPage extends StatefulWidget {
+  @override
+  _AppLoginPageState createState() => _AppLoginPageState();
+}
+
+class _AppLoginPageState extends State<AppLoginPage> {
+  String _email = '';
+  String _password = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +48,9 @@ class AppLoginPage extends StatelessWidget {
                       height: 30,
                       width: 307,
                       child: TextField(
+                        onChanged: (value) {
+                          _email = value;
+                        },
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
@@ -46,7 +59,7 @@ class AppLoginPage extends StatelessWidget {
                           ),
                           fillColor: AppColors.white,
                           filled: true,
-                          labelText: "nome de usuário",
+                          labelText: "Email",
 
                           //icon: Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -62,6 +75,9 @@ class AppLoginPage extends StatelessWidget {
                       height: 30,
                       width: 307,
                       child: TextField(
+                        onChanged: (value) {
+                          _password = value;
+                        },
                         obscureText: true,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -71,7 +87,7 @@ class AppLoginPage extends StatelessWidget {
                           ),
                           fillColor: AppColors.white,
                           filled: true,
-                          labelText: "senha",
+                          labelText: "Senha",
 
                           //icon: Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -83,19 +99,42 @@ class AppLoginPage extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 32),
-                    child: Container(
-                      height: 46,
-                      width: 157,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(18.71),
-                      ),
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Center(
-                          child: Text(
-                            'Entrar',
-                            style: AppTextFonts.entrarButton,
+                    child: GestureDetector(
+                      onTap: () async {
+                        if (_email == '' || _password == '') {
+                          _alert(context, "Campos inválidos",
+                              "Preencha todos os campos!", true);
+                        } else {
+                          print("$_email" + "\n" + "$_password");
+                          var response = await AuthController()
+                              .auth(email: _email, password: _password);
+                          print(response);
+                          if (response.containsKey('token')) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AppHomePage(),
+                              ),
+                            );
+                          } else {
+                            _alert(context, "Falha ao efetuar login",
+                                "Verifique seus dados!", true);
+                          }
+                        }
+                      },
+                      child: Container(
+                        height: 46,
+                        width: 157,
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(18.71),
+                        ),
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              'Entrar',
+                              style: AppTextFonts.entrarButton,
+                            ),
                           ),
                         ),
                       ),
@@ -121,7 +160,14 @@ class AppLoginPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AppSearchEmailPage(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Recuperar senha',
                         style: AppTextFonts.whiteTextButton,
@@ -144,5 +190,29 @@ class AppLoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _alert(BuildContext context, String title, String body, bool err) {
+    Widget button = TextButton(
+      onPressed: () {
+        if (err == false) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AppHomePage()));
+        } else {
+          Navigator.pop(context);
+        }
+      },
+      child: Text("ok"),
+    );
+    var alertBox = AlertDialog(
+      title: Text("$title"),
+      content: Text("$body"),
+      actions: [button],
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alertBox;
+        });
   }
 }

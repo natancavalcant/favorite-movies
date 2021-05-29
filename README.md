@@ -8,6 +8,7 @@ features adicionadas, signup.
 
 Para instalar as dependências: flutter pub get. Para rodar a aplicação recomendo utilizar um emulador android, o próprio VsCode da uma opção para executar em um emulador aberto na aba de debug.
 
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

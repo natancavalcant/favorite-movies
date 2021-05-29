@@ -5,7 +5,14 @@ import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class AppResetPasswordPage extends StatelessWidget {
+class AppResetPasswordPage extends StatefulWidget {
+  final String _question;
+  AppResetPasswordPage(this._question);
+  @override
+  _AppResetPasswordPageState createState() => _AppResetPasswordPageState();
+}
+
+class _AppResetPasswordPageState extends State<AppResetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +41,7 @@ class AppResetPasswordPage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 80),
                     child: Text(
-                      "Pergunta de recuperação?",
+                      "${widget._question}",
                       style: AppTextFonts.heading_5,
                     ),
                   ),

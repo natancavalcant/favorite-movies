@@ -8,4 +8,5 @@ class AppImages {
   static String get naoFavorito => "assets/images/naofavorito.png";
   static String get favorito => "assets/images/favorito.png";
   static String get voltar => "assets/images/voltar.png";
+  static String get errorImage => "assets/images/errorimage.png";
 }

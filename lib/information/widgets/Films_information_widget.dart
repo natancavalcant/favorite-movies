@@ -17,7 +17,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
   Widget build(BuildContext context) {
     setState(
       () {
-        if (widget._film.favorite == true) {
+        if (true) {
           _favoriteImage = AppImages.favorito;
         }
       },
@@ -31,7 +31,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
           Container(
             padding: EdgeInsets.only(bottom: 8),
             child: Text(
-              "${widget._film.name}",
+              "${widget._film.title}",
               style: AppTextFonts.heading_2,
             ),
           ),
@@ -44,7 +44,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                 width: 265,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("${widget._film.assetImage}"),
+                    image: AssetImage(AppImages.movieBanner),
                   ),
                 ),
               ),
@@ -57,7 +57,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                       onTap: () {
                         setState(
                           () {
-                            widget._film.favorite = !widget._film.favorite;
+                            //widget._film.favorite = !widget._film.favorite;
                             _favoriteImage =
                                 _favoriteImage == AppImages.naoFavorito
                                     ? AppImages.favorito
@@ -93,7 +93,7 @@ class _FilmsInformationState extends State<FilmsInformationWidget> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, left: 2),
                   child: Text(
-                    "${widget._film.description}",
+                    "",
                     style: AppTextFonts.text_2,
                   ),
                 )

@@ -81,4 +81,9 @@ class AppTextFonts {
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
+  static final TextStyle textD = GoogleFonts.roboto(
+    color: AppColors.blue,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
 }

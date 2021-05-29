@@ -11,11 +11,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ">=2.0.0"
   http: 
+  flutter_secure_storage:
+  transparent_image:
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+    
+  
   
 flutter:
   assets:

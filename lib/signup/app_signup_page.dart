@@ -65,7 +65,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                           ),
                           fillColor: AppColors.white,
                           filled: true,
-                          labelText: "nome de usuário",
+                          labelText: "Nome de usuário",
 
                           //icon: Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -94,7 +94,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                           ),
                           fillColor: AppColors.white,
                           filled: true,
-                          labelText: "e-mail",
+                          labelText: "E-mail",
 
                           //icon: Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -122,7 +122,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                           ),
                           fillColor: AppColors.white,
                           filled: true,
-                          labelText: "senha",
+                          labelText: "Senha",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -149,7 +149,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                           ),
                           fillColor: AppColors.white,
                           filled: true,
-                          labelText: "pergunta de recuperação",
+                          labelText: "Pergunta de recuperação",
 
                           //icon: Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -178,7 +178,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                           ),
                           fillColor: AppColors.white,
                           filled: true,
-                          labelText: "resposta",
+                          labelText: "Resposta",
 
                           //icon: Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -239,7 +239,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                         );
                       },
                       child: Text(
-                        'entrar',
+                        'Entrar',
                         style: AppTextFonts.whiteTextButton,
                       ),
                     ),

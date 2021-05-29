@@ -14,13 +14,13 @@ class _AppFilmsWidgetState extends State<AppFilmsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 216.78,
+      height: 220.78,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         //padding: EdgeInsets.only(left: 2),
-        itemCount: 10,
+        itemCount: widget.films.length,
         itemBuilder: (context, i) {
-          if (i >= 10) {}
+          //if (i % 2 == 1) {}
           return AppFilmWidget(widget.films[i]);
         },
       ),

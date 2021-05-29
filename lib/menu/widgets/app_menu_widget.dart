@@ -1,5 +1,7 @@
+import 'package:favoritemovies/controllers/auth_controller.dart';
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
+import 'package:favoritemovies/login/app_login_page.dart';
 import 'package:favoritemovies/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +47,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             height: 30,
             width: 307,
             child: TextField(
+              enabled: false,
               controller:
                   TextEditingController(text: "${widget._user.username}"),
               textAlignVertical: TextAlignVertical.center,
@@ -79,6 +82,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                   height: 30,
                   width: 307,
                   child: TextField(
+                    enabled: false,
                     onChanged: (value) {},
                     obscureText: !showPassword,
                     controller:
@@ -136,6 +140,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             height: 30,
             width: 307,
             child: TextField(
+              enabled: false,
               controller:
                   TextEditingController(text: "${widget._user.question}"),
               textAlignVertical: TextAlignVertical.center,
@@ -160,6 +165,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             height: 30,
             width: 307,
             child: TextField(
+              enabled: false,
               controller: TextEditingController(text: "${widget._user.answer}"),
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
@@ -210,7 +216,15 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                 borderRadius: BorderRadius.circular(18.71),
               ),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  AuthController().cleanCache();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AppLoginPage(),
+                    ),
+                  );
+                },
                 child: Center(
                   child: Text(
                     'Sair',
