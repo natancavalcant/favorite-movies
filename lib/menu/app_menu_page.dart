@@ -10,21 +10,25 @@ class AppMenuPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBarInformationWidget(context),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  AppMenuWidget(
-                    User.getUser(),
-                  ),
-                ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                child: Column(
+                  children: [
+                    AppMenuWidget(
+                      User.getUser(),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          AppAuthorBarWidget(),
-        ],
+            AppAuthorBarWidget(),
+          ],
+        ),
       ),
     );
   }

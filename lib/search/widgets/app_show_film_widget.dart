@@ -1,4 +1,3 @@
-import 'package:favoritemovies/core/app_images.dart';
 import 'package:favoritemovies/models/films.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';

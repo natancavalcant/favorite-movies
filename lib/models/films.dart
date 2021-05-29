@@ -1,5 +1,3 @@
-import 'package:favoritemovies/core/app_images.dart';
-
 class Films {
   final String title;
   final String kind;

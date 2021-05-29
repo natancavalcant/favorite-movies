@@ -48,7 +48,7 @@ class _AppSearchEmailPageState extends State<AppSearchEmailPage> {
                       width: 307,
                       child: TextField(
                         onChanged: (value) {
-                          _email = value;
+                          _email = value.trim();
                         },
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -91,6 +91,7 @@ class _AppSearchEmailPageState extends State<AppSearchEmailPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => AppResetPasswordPage(
+                                    _email,
                                     response['recovery_question'],
                                   ),
                                 ),

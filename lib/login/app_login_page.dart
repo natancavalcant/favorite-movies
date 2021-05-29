@@ -17,176 +17,187 @@ class AppLoginPage extends StatefulWidget {
 class _AppLoginPageState extends State<AppLoginPage> {
   String _email = '';
   String _password = '';
+  _auth() async {
+    if (await AuthController().verifyToken()) {
+      return Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AppHomePage()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(color: AppColors.red),
-        child: ListView(
-          children: [
-            Container(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.122,
+    //_auth();
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(color: AppColors.red),
+          child: ListView(
+            children: [
+              Container(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.122,
+                ),
               ),
-            ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 165,
-                    width: 156,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(AppImages.logo),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 40),
-                    child: Container(
-                      height: 30,
-                      width: 307,
-                      child: TextField(
-                        onChanged: (value) {
-                          _email = value;
-                        },
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 0.0),
-                          ),
-                          fillColor: AppColors.white,
-                          filled: true,
-                          labelText: "Email",
-
-                          //icon: Icon(Icons.search),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 165,
+                      width: 156,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(AppImages.logo),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 32),
-                    child: Container(
-                      height: 30,
-                      width: 307,
-                      child: TextField(
-                        onChanged: (value) {
-                          _password = value;
-                        },
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 0.0),
-                          ),
-                          fillColor: AppColors.white,
-                          filled: true,
-                          labelText: "Senha",
-
-                          //icon: Icon(Icons.search),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 32),
-                    child: GestureDetector(
-                      onTap: () async {
-                        if (_email == '' || _password == '') {
-                          _alert(context, "Campos inválidos",
-                              "Preencha todos os campos!", true);
-                        } else {
-                          print("$_email" + "\n" + "$_password");
-                          var response = await AuthController()
-                              .auth(email: _email, password: _password);
-                          print(response);
-                          if (response.containsKey('token')) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AppHomePage(),
-                              ),
-                            );
-                          } else {
-                            _alert(context, "Falha ao efetuar login",
-                                "Verifique seus dados!", true);
-                          }
-                        }
-                      },
+                    Padding(
+                      padding: EdgeInsets.only(top: 40),
                       child: Container(
-                        height: 46,
-                        width: 157,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(18.71),
-                        ),
-                        child: Container(
-                          child: Center(
-                            child: Text(
-                              'Entrar',
-                              style: AppTextFonts.entrarButton,
+                        height: 30,
+                        width: 307,
+                        child: TextField(
+                          onChanged: (value) {
+                            _email = value.trim();
+                          },
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide:
+                                  BorderSide(color: Colors.white, width: 0.0),
+                            ),
+                            fillColor: AppColors.white,
+                            filled: true,
+                            labelText: "Email",
+
+                            //icon: Icon(Icons.search),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AppSignupPage(),
+                    Padding(
+                      padding: EdgeInsets.only(top: 32),
+                      child: Container(
+                        height: 30,
+                        width: 307,
+                        child: TextField(
+                          onChanged: (value) {
+                            _password = value;
+                          },
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide:
+                                  BorderSide(color: Colors.white, width: 0.0),
+                            ),
+                            fillColor: AppColors.white,
+                            filled: true,
+                            labelText: "Senha",
+
+                            //icon: Icon(Icons.search),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Criar conta',
-                        style: AppTextFonts.whiteTextButton,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AppSearchEmailPage(),
+                    Padding(
+                      padding: EdgeInsets.only(top: 32),
+                      child: GestureDetector(
+                        onTap: () async {
+                          if (_email == '' || _password == '') {
+                            _alert(context, "Campos inválidos",
+                                "Preencha todos os campos!", true);
+                          } else {
+                            print("$_email" + "\n" + "$_password");
+                            var response = await AuthController()
+                                .auth(email: _email, password: _password);
+                            print(response);
+                            if (response.containsKey('token')) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AppHomePage(),
+                                ),
+                              );
+                            } else {
+                              _alert(context, "Falha ao efetuar login",
+                                  "Verifique seus dados!", true);
+                            }
+                          }
+                        },
+                        child: Container(
+                          height: 46,
+                          width: 157,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(18.71),
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Recuperar senha',
-                        style: AppTextFonts.whiteTextButton,
+                          child: Container(
+                            child: Center(
+                              child: Text(
+                                'Entrar',
+                                style: AppTextFonts.entrarButton,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AppSignupPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Criar conta',
+                          style: AppTextFonts.whiteTextButton,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AppSearchEmailPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Recuperar senha',
+                          style: AppTextFonts.whiteTextButton,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              child: Container(
-                height: 91,
+              Container(
+                child: Container(
+                  height: 91,
+                ),
               ),
-            ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: AppAuthorBarWidget(),
-            )
-          ],
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: AppAuthorBarWidget(),
+              )
+            ],
+          ),
         ),
       ),
     );

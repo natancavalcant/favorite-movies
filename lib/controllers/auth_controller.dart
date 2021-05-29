@@ -41,12 +41,15 @@ class AuthController {
     var response = await http.post(_url,
         body: jsonEncode({'email': email, 'password': password}));
     var token = json.decode(response.body);
+    print("verify");
+    verifyToken();
     print(token);
     if (token.containsKey('token')) {
       saveEmail(email: email);
       saveToken(token: token['token']);
       return token;
     }
+
     return {'err': token['message']};
   }
 }

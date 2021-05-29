@@ -53,7 +53,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                       width: 307,
                       child: TextField(
                         onChanged: (value) {
-                          _username = value;
+                          _username = value.trim();
                         },
                         maxLength: 100,
                         decoration: InputDecoration(
@@ -82,7 +82,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                       width: 307,
                       child: TextField(
                         onChanged: (value) {
-                          _email = value;
+                          _email = value.trim();
                         },
                         maxLength: 100,
                         decoration: InputDecoration(
@@ -137,7 +137,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                       width: 307,
                       child: TextField(
                         onChanged: (value) {
-                          _question = value;
+                          _question = value.trim();
                         },
                         maxLength: 100,
                         decoration: InputDecoration(
@@ -166,7 +166,7 @@ class _AppSignupPageState extends State<AppSignupPage> {
                       width: 307,
                       child: TextField(
                         onChanged: (value) {
-                          _answer = value;
+                          _answer = value.trim();
                         },
                         maxLength: 100,
                         decoration: InputDecoration(
