@@ -1,6 +1,4 @@
 import 'package:favoritemovies/core/app_images.dart';
-import 'package:favoritemovies/information/films_information_page.dart';
-import 'package:favoritemovies/information/widgets/Films_information_widget.dart';
 import 'package:favoritemovies/models/films.dart';
 import 'package:flutter/material.dart';
 

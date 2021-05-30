@@ -1,13 +1,12 @@
 import 'package:favoritemovies/controllers/auth_controller.dart';
+import 'package:favoritemovies/controllers/user_controller.dart';
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_text_fonts.dart';
 import 'package:favoritemovies/login/app_login_page.dart';
-import 'package:favoritemovies/models/user.dart';
 import 'package:flutter/material.dart';
 
 class AppMenuWidget extends StatefulWidget {
-  final User _user;
-
+  final _user;
   AppMenuWidget(this._user);
 
   @override
@@ -16,8 +15,23 @@ class AppMenuWidget extends StatefulWidget {
 
 class _AppMenuWidgetState extends State<AppMenuWidget> {
   bool showPassword = false;
+  String _name = '';
+  String _password = '';
+  String _question = '';
+  String _answer = '';
+  @override
+  void initState() {
+    super.initState();
+    _name = widget._user['name'];
+    _question = widget._user['recovery_question'];
+  }
+
   @override
   Widget build(BuildContext context) {
+    return _renderMenu();
+  }
+
+  _renderMenu() {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,9 +63,8 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
               height: 30,
               width: 307,
               child: TextField(
-                enabled: false,
-                controller:
-                    TextEditingController(text: "${widget._user.username}"),
+                //enabled: false,
+                controller: TextEditingController(text: "$_name"),
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -60,13 +73,13 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                   ),
                   fillColor: AppColors.grey,
                   filled: true,
-                  labelText: "nome de usuário",
+                  labelText: "Nome de usuário(opcional)",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
                 onChanged: (text) {
-                  if (text.isNotEmpty) {}
+                  _name = text.trim();
                 },
               ),
             ),
@@ -86,11 +99,8 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                     height: 30,
                     width: 277,
                     child: TextField(
-                      enabled: false,
-                      onChanged: (value) {},
                       obscureText: !showPassword,
-                      controller: TextEditingController(
-                          text: "${widget._user.password}"),
+                      controller: TextEditingController(text: "$_password"),
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -100,11 +110,14 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                         ),
                         fillColor: AppColors.grey,
                         filled: true,
-                        labelText: "senha",
+                        labelText: "Nova senha(opcional)",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
+                      onChanged: (text) {
+                        _password = text.trim();
+                      },
                     ),
                   ),
                 ),
@@ -122,7 +135,6 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                           value: showPassword,
                           onChanged: (value) {
                             setState(() {
-                              //print(value);
                               showPassword = !showPassword;
                             });
                           },
@@ -147,9 +159,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
               height: 30,
               width: 307,
               child: TextField(
-                enabled: false,
-                controller:
-                    TextEditingController(text: "${widget._user.question}"),
+                controller: TextEditingController(text: "$_question"),
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -158,11 +168,14 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                   ),
                   fillColor: AppColors.grey,
                   filled: true,
-                  labelText: "pergunta de verificação",
+                  labelText: "Pergunta de verificação(opcional)",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
+                onChanged: (text) {
+                  _question = text.trim();
+                },
               ),
             ),
           ),
@@ -172,9 +185,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
               height: 30,
               width: 307,
               child: TextField(
-                enabled: false,
-                controller:
-                    TextEditingController(text: "${widget._user.answer}"),
+                controller: TextEditingController(text: "$_answer"),
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -183,26 +194,32 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                   ),
                   fillColor: AppColors.grey,
                   filled: true,
-                  labelText: "resposta",
+                  labelText: "Nova resposta(opcional)",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
+                onChanged: (text) {
+                  _answer = text.trim();
+                },
               ),
             ),
           ),
           Container(
             padding: EdgeInsets.only(top: 20),
             child: Center(
-              child: Container(
-                height: 46,
-                width: 157,
-                decoration: BoxDecoration(
-                  color: AppColors.blue,
-                  borderRadius: BorderRadius.circular(18.71),
-                ),
-                child: GestureDetector(
-                  onTap: () {},
+              child: GestureDetector(
+                onTap: () async {
+                  _alertAlter(context, "Alterar informações?",
+                      "Não há como voltar atrás.");
+                },
+                child: Container(
+                  height: 46,
+                  width: 157,
+                  decoration: BoxDecoration(
+                    color: AppColors.blue,
+                    borderRadius: BorderRadius.circular(18.71),
+                  ),
                   child: Center(
                     child: Text(
                       'Salvar',
@@ -248,5 +265,64 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
         ],
       ),
     );
+  }
+
+  _alert(BuildContext context, String title, String body) {
+    Widget button = TextButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: Text("ok"),
+    );
+    var alertBox = AlertDialog(
+      title: Text("$title"),
+      content: Text("$body"),
+      actions: [button],
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alertBox;
+        });
+  }
+
+  _alertAlter(BuildContext context, String title, String body) {
+    Widget recuseButton = TextButton(
+      onPressed: () {
+        setState(() {
+          _name = widget._user['name'];
+          _password = '';
+          _answer = widget._user['recovery_question'];
+          _question = '';
+          Navigator.pop(context);
+        });
+      },
+      child: Text("Não"),
+    );
+    Widget confirmButton = TextButton(
+      onPressed: () async {
+        var response = await UserController()
+            .alterUserInformation(_name, _password, _question, _answer);
+        Navigator.pop(context);
+        if (response) {
+          _alert(context, "Suas informações foram alteradas!",
+              "Informações alteradas com sucesso.");
+        } else {
+          _alert(context, "Algo deu errado",
+              "Houve algum erro ao tentar alterar os dados");
+        }
+      },
+      child: Text("Sim"),
+    );
+    var alertBox = AlertDialog(
+      title: Text("$title"),
+      content: Text("$body"),
+      actions: [recuseButton, confirmButton],
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alertBox;
+        });
   }
 }

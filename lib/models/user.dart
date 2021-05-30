@@ -33,10 +33,10 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        username: json['username'],
-        email: json['email'],
-        password: json['password'],
+        username: json['name'] == null ? '' : json['name'],
+        email: json['email'] == null ? '' : json['email'],
+        password: json['password'] == null ? '' : json['password'],
         question: json['recovery_question'],
-        answer: json['recovery_answer']);
+        answer: json['recovery_answer'] == null ? '' : json['recovery_answer']);
   }
 }

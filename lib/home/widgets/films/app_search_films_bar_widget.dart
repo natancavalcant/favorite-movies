@@ -1,9 +1,6 @@
-import 'package:favoritemovies/controllers/films_controller.dart';
 import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_images.dart';
-import 'package:favoritemovies/models/films.dart';
 import 'package:favoritemovies/search/app_search_films.dart';
-import 'package:favoritemovies/search/widgets/app_result_search_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppSearchFilmsBarWidget extends StatelessWidget {
@@ -61,24 +58,5 @@ class AppSearchFilmsBarWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  _alert(BuildContext context, String title, String body) {
-    Widget button = TextButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      child: Text("ok"),
-    );
-    var alertBox = AlertDialog(
-      title: Text("$title"),
-      content: Text("$body"),
-      actions: [button],
-    );
-    showDialog(
-        context: context,
-        builder: (context) {
-          return alertBox;
-        });
   }
 }

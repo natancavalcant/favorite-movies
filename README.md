@@ -2,7 +2,7 @@
 
 Uma aplicação que acessa o banco de dados do TMDB para mostrar informações dos filmes ao usuário.
 
-features adicionadas, signup.
+features adicionadas, signup, singin, recuperar password, buscar filmes por nome, vizualizar detalhes dos filmes.
 
 ## Run aplication
 
