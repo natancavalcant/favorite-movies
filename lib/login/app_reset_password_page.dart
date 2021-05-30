@@ -129,7 +129,7 @@ class _AppResetPasswordPageState extends State<AppResetPasswordPage> {
                                 "Por favor, efetue o login", false);
                           } else {
                             _alert(context, "Algo deu errado",
-                                "${response['message']}", true);
+                                "${response['err']}", true);
                           }
                         },
                         child: Center(

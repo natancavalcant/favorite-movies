@@ -1,4 +1,3 @@
-import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_images.dart';
 import 'package:favoritemovies/core/core.dart';
 import 'package:favoritemovies/information/films_information_page.dart';

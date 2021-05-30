@@ -34,7 +34,7 @@ class UserController {
         body: jsonEncode({
           "name": name,
           "email": email,
-          //"password": password,
+          "password": password,
           "recovery_question": question,
           "recovery_answer": answer
         }),

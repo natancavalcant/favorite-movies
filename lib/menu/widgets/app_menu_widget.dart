@@ -99,9 +99,8 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                     height: 30,
                     width: 277,
                     child: TextField(
-                      enabled: false,
                       obscureText: !showPassword,
-                      controller: TextEditingController(text: "$_password"),
+                      //controller: TextEditingController(text: "$_password"),
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -111,7 +110,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                         ),
                         fillColor: AppColors.grey,
                         filled: true,
-                        labelText: "Nova senha(opcional)",
+                        labelText: "Nova senha(obrigatório alterar senha.)",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -211,6 +210,10 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             child: Center(
               child: GestureDetector(
                 onTap: () async {
+                  if (_password == '') {
+                    return _alert(context, "Campo Inválido",
+                        "Preencha o campo de senha!");
+                  }
                   _alertAlter(context, "Alterar informações?",
                       "Não há como voltar atrás.");
                 },
