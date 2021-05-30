@@ -8,6 +8,18 @@ features adicionadas, signup, singin, recuperar password, buscar filmes por nome
 
 Para instalar as dependências: flutter pub get. Para rodar a aplicação recomendo utilizar um emulador android, o próprio VsCode da uma opção para executar em um emulador aberto na aba de debug.
 
+## Run on Device
+
+Install flutter (see Getting Started)*
+
+--connect device on computer with depuration mode activate.
+
+Get this reposity.
+
+Get dependencies: Futter pub get into repository.
+
+To run with debug mode: flutter run
+To install in device: flutter build apk and flutter install. 
 
 ## Getting Started
 

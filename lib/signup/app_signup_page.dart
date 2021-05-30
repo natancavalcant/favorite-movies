@@ -199,6 +199,14 @@ class _AppSignupPageState extends State<AppSignupPage> {
                       ),
                       child: GestureDetector(
                         onTap: () async {
+                          if (_username == '' ||
+                              _email == '' ||
+                              _password == '' ||
+                              _question == '' ||
+                              _answer == '') {
+                            return _alert(context, "Erro:",
+                                "Preencha todos os campos.", true);
+                          }
                           var response = await SignupController().signup(
                               _username, _email, _password, _question, _answer);
 

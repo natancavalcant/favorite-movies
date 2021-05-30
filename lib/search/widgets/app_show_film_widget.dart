@@ -1,4 +1,6 @@
+import 'package:favoritemovies/core/app_colors.dart';
 import 'package:favoritemovies/core/app_images.dart';
+import 'package:favoritemovies/core/core.dart';
 import 'package:favoritemovies/information/films_information_page.dart';
 import 'package:favoritemovies/information/widgets/Films_information_widget.dart';
 import 'package:favoritemovies/models/films.dart';
@@ -16,6 +18,13 @@ class _AppShowFilmWidgetState extends State<AppShowFilmWidget> {
     try {
       return Image.network(
         url,
+        errorBuilder:
+            (BuildContext context, Object exception, StackTrace? stackTrace) {
+          return Image.asset(
+            AppImages.errorImage,
+            fit: BoxFit.fill,
+          );
+        },
         fit: BoxFit.cover,
         loadingBuilder: (BuildContext context, Widget child,
             ImageChunkEvent? loadingProgress) {

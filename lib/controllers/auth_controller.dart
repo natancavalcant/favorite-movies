@@ -27,9 +27,12 @@ class AuthController {
   }
 
   verifyToken() async {
-    var key = await _storage.containsKey(key: 'token');
+    var key = await _storage.read(key: 'token');
+    if (key != '') {
+      return true;
+    }
     print(key);
-    return key;
+    return false;
   }
 
   cleanCache() async {

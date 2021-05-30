@@ -99,6 +99,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                     height: 30,
                     width: 277,
                     child: TextField(
+                      enabled: false,
                       obscureText: !showPassword,
                       controller: TextEditingController(text: "$_password"),
                       textAlignVertical: TextAlignVertical.center,

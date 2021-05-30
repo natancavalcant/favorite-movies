@@ -97,8 +97,7 @@ class _AppSearchEmailPageState extends State<AppSearchEmailPage> {
                                 ),
                               );
                             } else {
-                              _alert(
-                                  context, 'Error', '${response['message']}');
+                              _alert(context, 'Error', '${response['err']}');
                             }
                           }
                         },
