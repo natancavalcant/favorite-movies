@@ -20,21 +20,13 @@ class AppSearchFilmsBarWidget extends StatelessWidget {
             child: TextField(
               onSubmitted: (value) async {
                 if (value != '') {
-                  List<Films> films =
-                      await FilmsController().getMoviesByName(value);
-
-                  if (films.isEmpty) {
-                    _alert(context, "Filme não encontrado.",
-                        "Tente pesquisar por outro nome");
-                  } else {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            AppSearchFilms(AppResultSearchWidget(value, films)),
-                      ),
-                    );
-                  }
+                  var _search = value.trim();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AppSearchFilms(_search),
+                    ),
+                  );
                 }
               },
               decoration: InputDecoration(

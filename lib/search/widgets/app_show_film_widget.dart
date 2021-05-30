@@ -1,3 +1,7 @@
+import 'package:favoritemovies/controllers/films_controller.dart';
+import 'package:favoritemovies/core/app_images.dart';
+import 'package:favoritemovies/information/films_information_page.dart';
+import 'package:favoritemovies/information/widgets/Films_information_widget.dart';
 import 'package:favoritemovies/models/films.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -10,33 +14,50 @@ class AppShowFilmWidget extends StatefulWidget {
 }
 
 class _AppShowFilmWidgetState extends State<AppShowFilmWidget> {
+  _getImage(String url) {
+    try {
+      return Image.network(
+        url,
+        fit: BoxFit.cover,
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes!
+                  : null,
+            ),
+          );
+        },
+      );
+    } catch (exp) {
+      return Image.asset(AppImages.errorImage);
+    }
+  }
+
   _showFilm(Films film) {
-    return Container(
-      width: 174,
-      height: 273,
-      padding: EdgeInsets.all(2),
+    return GestureDetector(
+      onTap: () async {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FilmsInformationPage(
+              FilmsInformationWidget(widget._film.imdb_id),
+            ),
+          ),
+        );
+      },
       child: Container(
-        child: FadeInImage.memoryNetwork(
-          placeholder: kTransparentImage,
-          image: film.cover_url,
-          imageErrorBuilder:
-              (BuildContext context, Object exception, StackTrace? stackTrace) {
-            return const Center(
-              child: Text("imagem não encontrada"),
-            );
-          },
-          fit: BoxFit.cover,
+        width: 174,
+        height: 273,
+        padding: EdgeInsets.all(2),
+        child: Container(
+          child: _getImage(film.cover_url),
         ),
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //       fit: BoxFit.cover,
-        //       image: NetworkImage(film.cover_url),
-        //       onError: (erro, stackTrace) => {
-        //             setState(() {
-        //               print(erro);
-        //             })
-        //           }),
-        // ),
       ),
     );
   }

@@ -6,4 +6,6 @@ class AppColors {
   static final Color grafit = Color(0xFF0D050E);
   static final Color blue = Color(0xFF2B193E);
   static final Color white = Color(0xFFFFFFFF);
+  static final Color yellow = Color(0xFFFCD12A);
+  static final Color green = Color(0xFFADFF2F);
 }

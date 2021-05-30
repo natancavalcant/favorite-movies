@@ -37,6 +37,12 @@ class AppTextFonts {
     color: AppColors.white,
     fontSize: 14,
     fontWeight: FontWeight.bold,
+    // shadows: [
+    //   Shadow(
+    //     blurRadius: 10.0,
+    //     color: Colors.black,
+    //     offset: Offset(0, 0),
+    //   ),]
   );
   static final TextStyle entrarButton = GoogleFonts.roboto(
     color: AppColors.red,
@@ -60,7 +66,7 @@ class AppTextFonts {
 
   static final TextStyle text_2 = GoogleFonts.roboto(
     color: Colors.black,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeight.normal,
   );
   static final TextStyle text_3 = GoogleFonts.roboto(

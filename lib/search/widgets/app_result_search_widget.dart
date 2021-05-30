@@ -29,10 +29,11 @@ class _AppResultSearchWidgetState extends State<AppResultSearchWidget> {
       if (widget._films.isEmpty) {
         return Expanded(
           child: Center(
-              child: Text(
-            "Nenhum resultado",
-            style: AppTextFonts.heading_6,
-          )),
+            child: Text(
+              "Nenhum resultado",
+              style: AppTextFonts.heading_6,
+            ),
+          ),
         );
       }
       return Expanded(

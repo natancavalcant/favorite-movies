@@ -18,15 +18,33 @@ class _AppLoginPageState extends State<AppLoginPage> {
   String _email = '';
   String _password = '';
   _auth() async {
-    if (await AuthController().verifyToken()) {
-      return Navigator.push(
-          context, MaterialPageRoute(builder: (context) => AppHomePage()));
-    }
+    return await AuthController().getToken();
   }
 
   @override
   Widget build(BuildContext context) {
-    //_auth();
+    _auth();
+    return FutureBuilder(
+        future: _auth(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return AppHomePage();
+          } else if (snapshot.data == null) {
+            return _renderLogin();
+          } else {
+            return Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: AppColors.red,
+              child: Center(
+                child: Image.asset(AppImages.logo),
+              ),
+            );
+          }
+        });
+  }
+
+  _renderLogin() {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(

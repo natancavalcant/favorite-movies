@@ -18,13 +18,13 @@ class _AppFilmWidgetState extends State<AppFilmWidget> {
       padding: EdgeInsets.all(2),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  FilmsInformationPage(FilmsInformationWidget(widget._film)),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) =>
+          //         FilmsInformationPage(FilmsInformationWidget(widget._film)),
+          //   ),
+          // );
         },
         child: Container(
           width: 148.52,

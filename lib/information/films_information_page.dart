@@ -1,7 +1,6 @@
 import 'package:favoritemovies/home/widgets/films/app_search_films_bar_widget.dart';
 import 'package:favoritemovies/information/widgets/Films_information_widget.dart';
 import 'package:favoritemovies/widgets/app_bar_information_widget.dart';
-import 'package:favoritemovies/widgets/app_author_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class FilmsInformationPage extends StatelessWidget {
@@ -24,15 +23,6 @@ class FilmsInformationPage extends StatelessWidget {
               ),
             ),
           ),
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: AppAuthorBarWidget(),
-              )
-            ],
-          )
         ],
       ),
     );

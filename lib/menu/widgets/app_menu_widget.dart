@@ -20,6 +20,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             padding: EdgeInsets.only(bottom: 10),
@@ -71,9 +72,11 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left: 27),
+            width: MediaQuery.of(context).size.width * 0.94,
+            alignment: Alignment.center,
+            padding: EdgeInsets.only(left: 0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
@@ -107,7 +110,7 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
-                  padding: EdgeInsets.only(right: 20),
+                  padding: EdgeInsets.only(right: 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -213,26 +216,24 @@ class _AppMenuWidgetState extends State<AppMenuWidget> {
           Container(
             padding: EdgeInsets.only(top: 20),
             child: Center(
-              child: Container(
-                height: 46,
-                width: 157,
-                decoration: BoxDecoration(
-                  color: AppColors.red,
-                  borderRadius: BorderRadius.circular(18.71),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    AuthController().cleanCache();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AppLoginPage(),
-                      ),
-                    );
-                  },
+              child: GestureDetector(
+                onTap: () {
+                  AuthController().cleanCache();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AppLoginPage(),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 46,
+                  width: 157,
+                  decoration: BoxDecoration(
+                    color: AppColors.red,
+                    borderRadius: BorderRadius.circular(18.71),
+                  ),
                   child: Container(
-                    height: 46,
-                    width: 157,
                     child: Center(
                       child: Text(
                         'Sair',
